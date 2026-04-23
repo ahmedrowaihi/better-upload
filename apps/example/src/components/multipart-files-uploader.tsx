@@ -1,6 +1,6 @@
 'use client';
 
-import { useUploadFiles } from '@better-upload/client';
+import { useUploadFiles } from '@ahmedrowaihi/better-upload-client';
 import { toast } from 'sonner';
 import { UploadDropzone } from './ui/upload-dropzone';
 import { UploadProgress } from './ui/upload-progress';

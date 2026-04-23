@@ -1,6 +1,6 @@
-import { route, Router } from '@better-upload/server';
-import { toRouteHandler } from '@better-upload/server/adapters/next';
-import { cloudflare } from '@better-upload/server/clients';
+import { route, Router } from '@ahmedrowaihi/better-upload-server';
+import { toRouteHandler } from '@ahmedrowaihi/better-upload-server/adapters/next';
+import { cloudflare } from '@ahmedrowaihi/better-upload-server/clients';
 
 const router: Router = {
   client: cloudflare(),

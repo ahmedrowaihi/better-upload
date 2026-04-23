@@ -1,6 +1,6 @@
 'use client';
 
-import { useUploadFiles } from '@better-upload/client';
+import { useUploadFiles } from '@ahmedrowaihi/better-upload-client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import * as z from 'zod';

@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   publish:
-    if: ${{ github.repository_owner == 'Nic13Gamer' }}
+    if: ${{ github.repository_owner == 'ahmedrowaihi' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

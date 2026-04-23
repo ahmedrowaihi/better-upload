@@ -1,6 +1,6 @@
 'use client';
 
-import { useUploadFiles } from '@better-upload/client';
+import { useUploadFiles } from '@ahmedrowaihi/better-upload-client';
 import { useForm } from '@tanstack/react-form';
 import * as z from 'zod';
 

@@ -1,5 +1,5 @@
 {
-  "name": "@better-upload/server",
+  "name": "@ahmedrowaihi/better-upload-server",
   "description": "The Better Upload server library. Simple and easy file uploads for React.",
   "version": "3.0.17",
   "type": "module",

@@ -8,8 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
-    "@better-upload/client": "workspace:*",
-    "@better-upload/server": "workspace:*",
+    "@ahmedrowaihi/better-upload-client": "workspace:*",
+    "@ahmedrowaihi/better-upload-server": "workspace:*",
     "@hookform/resolvers": "^5.2.2",
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-progress": "^1.1.2",

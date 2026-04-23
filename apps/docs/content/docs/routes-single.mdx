@@ -24,7 +24,7 @@ You can create multiple routes for different purposes (e.g. images, videos).
 Here is a basic example of a single file upload route:
 
 ```ts
-import { route } from '@better-upload/server';
+import { route } from '@ahmedrowaihi/better-upload-server';
 
 route({
   fileTypes: ['image/*'], // Accepts all image types
@@ -217,7 +217,7 @@ You can now also modify the following options:
 The router is where all upload routes are defined. To define a router, create an object with the `Router` type.
 
 ```ts
-import { type Router } from '@better-upload/server';
+import { type Router } from '@ahmedrowaihi/better-upload-server';
 
 export const router: Router = {
   client: s3,

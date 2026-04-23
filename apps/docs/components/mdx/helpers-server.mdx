@@ -1,7 +1,7 @@
 <section id="s3-clients">
 
 ```ts tab="AWS S3"
-import { aws } from '@better-upload/server/clients';
+import { aws } from '@ahmedrowaihi/better-upload-server/clients';
 
 const s3 = aws({
   accessKeyId: 'your-access-key-id',
@@ -11,7 +11,7 @@ const s3 = aws({
 ```
 
 ```ts tab="Cloudflare R2"
-import { cloudflare } from '@better-upload/server/clients';
+import { cloudflare } from '@ahmedrowaihi/better-upload-server/clients';
 
 const s3 = cloudflare({
   accountId: 'your-account-id',
@@ -21,7 +21,7 @@ const s3 = cloudflare({
 ```
 
 ```ts tab="Tigris"
-import { tigris } from '@better-upload/server/clients';
+import { tigris } from '@ahmedrowaihi/better-upload-server/clients';
 
 const s3 = tigris({
   accessKeyId: 'your-access-key-id',
@@ -31,7 +31,7 @@ const s3 = tigris({
 ```
 
 ```ts tab="Backblaze B2"
-import { backblaze } from '@better-upload/server/clients';
+import { backblaze } from '@ahmedrowaihi/better-upload-server/clients';
 
 const s3 = backblaze({
   region: 'your-backblaze-region',
@@ -41,7 +41,7 @@ const s3 = backblaze({
 ```
 
 ```ts tab="DigitalOcean Spaces"
-import { digitalOcean } from '@better-upload/server/clients';
+import { digitalOcean } from '@ahmedrowaihi/better-upload-server/clients';
 
 const s3 = digitalOcean({
   region: 'your-spaces-region',
@@ -51,7 +51,7 @@ const s3 = digitalOcean({
 ```
 
 ```ts tab="Wasabi"
-import { wasabi } from '@better-upload/server/clients';
+import { wasabi } from '@ahmedrowaihi/better-upload-server/clients';
 
 const s3 = wasabi({
   region: 'your-wasabi-region',
@@ -61,7 +61,7 @@ const s3 = wasabi({
 ```
 
 ```ts tab="MinIO"
-import { minio } from '@better-upload/server/clients';
+import { minio } from '@ahmedrowaihi/better-upload-server/clients';
 
 const s3 = minio({
   region: 'your-minio-region',
@@ -72,7 +72,7 @@ const s3 = minio({
 ```
 
 ```ts tab="Linode"
-import { linode } from '@better-upload/server/clients';
+import { linode } from '@ahmedrowaihi/better-upload-server/clients';
 
 const s3 = linode({
   region: 'your-linode-region',
@@ -83,7 +83,7 @@ const s3 = linode({
 
 ```ts tab="Custom"
 // for any S3-compatible service
-import { custom } from '@better-upload/server/clients';
+import { custom } from '@ahmedrowaihi/better-upload-server/clients';
 
 const s3 = custom({
   host: 's3.us-east-1.amazonaws.com',

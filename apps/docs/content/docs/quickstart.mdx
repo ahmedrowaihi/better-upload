@@ -30,10 +30,10 @@ Before you start, make sure you have an S3-compatible bucket ready. You can use 
 
 ### Install
 
-Install the `@better-upload/server` and `@better-upload/client` packages.
+Install the `@ahmedrowaihi/better-upload-server` and `@ahmedrowaihi/better-upload-client` packages.
 
 ```npm
-npm i @better-upload/server @better-upload/client
+npm i @ahmedrowaihi/better-upload-server @ahmedrowaihi/better-upload-client
 ```
 
 </Step>
@@ -73,7 +73,7 @@ We'll also use the `useUploadFiles` hook. The complete code looks like this:
 ```tsx title="uploader.tsx"
 'use client'; // only for Next.js
 
-import { useUploadFiles } from '@better-upload/client';
+import { useUploadFiles } from '@ahmedrowaihi/better-upload-client';
 import { UploadDropzone } from '@/components/ui/upload-dropzone';
 
 export function Uploader() {

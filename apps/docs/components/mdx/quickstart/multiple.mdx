@@ -1,9 +1,9 @@
 <section id="server">
 
 ```ts tab="Next.js" title="app/api/upload/route.ts"
-import { route, type Router } from '@better-upload/server';
-import { toRouteHandler } from '@better-upload/server/adapters/next';
-import { aws } from '@better-upload/server/clients';
+import { route, type Router } from '@ahmedrowaihi/better-upload-server';
+import { toRouteHandler } from '@ahmedrowaihi/better-upload-server/adapters/next';
+import { aws } from '@ahmedrowaihi/better-upload-server/clients';
 
 const router: Router = {
   client: aws(), // or cloudflare(), backblaze(), tigris(), ... // [!code highlight]
@@ -22,8 +22,8 @@ export const { POST } = toRouteHandler(router);
 
 ```ts tab="TanStack Start" title="routes/api/upload.ts"
 import { createFileRoute } from '@tanstack/react-router';
-import { handleRequest, route, type Router } from '@better-upload/server';
-import { aws } from '@better-upload/server/clients';
+import { handleRequest, route, type Router } from '@ahmedrowaihi/better-upload-server';
+import { aws } from '@ahmedrowaihi/better-upload-server/clients';
 
 const router: Router = {
   client: aws(), // or cloudflare(), backblaze(), tigris(), ... // [!code highlight]
@@ -50,8 +50,8 @@ export const Route = createFileRoute('/api/upload')({
 
 ```ts tab="Remix" title="app/routes/api.upload.ts"
 import { ActionFunctionArgs } from '@remix-run/node';
-import { handleRequest, route, type Router } from '@better-upload/server';
-import { aws } from '@better-upload/server/clients';
+import { handleRequest, route, type Router } from '@ahmedrowaihi/better-upload-server';
+import { aws } from '@ahmedrowaihi/better-upload-server/clients';
 
 const router: Router = {
   client: aws(), // or cloudflare(), backblaze(), tigris(), ... // [!code highlight]
@@ -74,8 +74,8 @@ export async function action({ request }: ActionFunctionArgs) {
 // when using a separate backend server, make sure to update the `api` option on the client hooks.
 
 import { Hono } from 'hono';
-import { handleRequest, route, type Router } from '@better-upload/server';
-import { aws } from '@better-upload/server/clients';
+import { handleRequest, route, type Router } from '@ahmedrowaihi/better-upload-server';
+import { aws } from '@ahmedrowaihi/better-upload-server/clients';
 
 const router: Router = {
   client: aws(), // or cloudflare(), backblaze(), tigris(), ... // [!code highlight]
@@ -102,8 +102,8 @@ export default app;
 // when using a separate backend server, make sure to update the `api` option on the client hooks.
 
 import { Elysia } from 'elysia';
-import { handleRequest, route, type Router } from '@better-upload/server';
-import { aws } from '@better-upload/server/clients';
+import { handleRequest, route, type Router } from '@ahmedrowaihi/better-upload-server';
+import { aws } from '@ahmedrowaihi/better-upload-server/clients';
 
 const router: Router = {
   client: aws(), // or cloudflare(), backblaze(), tigris(), ... // [!code highlight]
@@ -128,9 +128,9 @@ const app = new Elysia()
 // when using a separate backend server, make sure to update the `api` option on the client hooks.
 
 import express from 'express';
-import { route, type Router } from '@better-upload/server';
-import { toNodeHandler } from '@better-upload/server/adapters/node';
-import { aws } from '@better-upload/server/clients';
+import { route, type Router } from '@ahmedrowaihi/better-upload-server';
+import { toNodeHandler } from '@ahmedrowaihi/better-upload-server/adapters/node';
+import { aws } from '@ahmedrowaihi/better-upload-server/clients';
 
 const router: Router = {
   client: aws(), // or cloudflare(), backblaze(), tigris(), ... // [!code highlight]
@@ -158,9 +158,9 @@ app.listen(3000);
 // when using a separate backend server, make sure to update the `api` option on the client hooks.
 
 import Fastify from 'fastify';
-import { route, type Router } from '@better-upload/server';
-import { toNodeHandler } from '@better-upload/server/adapters/node';
-import { aws } from '@better-upload/server/clients';
+import { route, type Router } from '@ahmedrowaihi/better-upload-server';
+import { toNodeHandler } from '@ahmedrowaihi/better-upload-server/adapters/node';
+import { aws } from '@ahmedrowaihi/better-upload-server/clients';
 
 const router: Router = {
   client: aws(), // or cloudflare(), backblaze(), tigris(), ... // [!code highlight]
@@ -191,8 +191,8 @@ app.listen({ port: 3000 });
 You can run code before uploads in the server. Use the `onBeforeUpload` callback:
 
 ```ts
-import { RejectUpload, route, type Router } from '@better-upload/server';
-import { aws } from '@better-upload/server/clients';
+import { RejectUpload, route, type Router } from '@ahmedrowaihi/better-upload-server';
+import { aws } from '@ahmedrowaihi/better-upload-server/clients';
 
 const auth = (req: Request) => ({ id: 'fake-user-id' }); // [!code highlight]
 

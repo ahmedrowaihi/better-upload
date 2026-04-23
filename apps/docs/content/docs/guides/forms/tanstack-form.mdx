@@ -29,9 +29,9 @@ npx shadcn@latest add field input button
 Setup your upload route. Use your preferred framework, but for this example, we'll use Next.js.
 
 ```ts title="app/api/upload/route.ts"
-import { route, type Router } from '@better-upload/server';
-import { toRouteHandler } from '@better-upload/server/adapters/next';
-import { aws } from '@better-upload/server/clients';
+import { route, type Router } from '@ahmedrowaihi/better-upload-server';
+import { toRouteHandler } from '@ahmedrowaihi/better-upload-server/adapters/next';
+import { aws } from '@ahmedrowaihi/better-upload-server/clients';
 
 const router: Router = {
   client: aws(),
@@ -82,7 +82,7 @@ const formSchema = z.object({
 Use the `useForm` hook from TanStack Form to create your form instance with Zod validation, along with the `useUploadFiles` hook to handle file uploads.
 
 ```tsx title="form.tsx"
-import { useUploadFiles } from '@better-upload/client';
+import { useUploadFiles } from '@ahmedrowaihi/better-upload-client';
 import { useForm } from '@tanstack/react-form';
 import * as z from 'zod';
 
@@ -140,7 +140,7 @@ We can now build the form using the `form.Field` component from TanStack Form an
 ```tsx title="form.tsx"
 'use client';
 
-import { useUploadFiles } from '@better-upload/client';
+import { useUploadFiles } from '@ahmedrowaihi/better-upload-client';
 import { useForm } from '@tanstack/react-form';
 import * as z from 'zod';
 
@@ -379,7 +379,7 @@ In this example, we only upload the files after the user clicks on the submit bu
 ```tsx title="form.tsx"
 'use client';
 
-import { useUploadFiles } from '@better-upload/client';
+import { useUploadFiles } from '@ahmedrowaihi/better-upload-client';
 import { useForm } from '@tanstack/react-form';
 import * as z from 'zod';
 

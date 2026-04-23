@@ -1,4 +1,4 @@
-import type { UploadHookControl } from '@better-upload/client';
+import type { UploadHookControl } from '@ahmedrowaihi/better-upload-client';
 
 type PasteUploadAreaProps = {
   children: React.ReactNode;

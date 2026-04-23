@@ -1,6 +1,6 @@
 'use client';
 
-import { useUploadFiles } from '@better-upload/client';
+import { useUploadFiles } from '@ahmedrowaihi/better-upload-client';
 import { toast } from 'sonner';
 import { Input } from './ui/input';
 import { PasteUploadArea } from './ui/paste-upload-area';

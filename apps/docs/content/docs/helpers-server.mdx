@@ -39,7 +39,7 @@ Helpers for working with objects in S3-compatible storage services. Suggest new 
 Generate a pre-signed URL to download an object. Commonly used for client-side downloads.
 
 ```ts
-import { presignGetObject } from '@better-upload/server/helpers';
+import { presignGetObject } from '@ahmedrowaihi/better-upload-server/helpers';
 
 const url = await presignGetObject(s3, {
   bucket: 'my-bucket',
@@ -53,7 +53,7 @@ const url = await presignGetObject(s3, {
 Get an object (including its content) from an S3 bucket.
 
 ```ts
-import { getObjectBlob, getObjectStream } from '@better-upload/server/helpers';
+import { getObjectBlob, getObjectStream } from '@ahmedrowaihi/better-upload-server/helpers';
 
 // as a Blob
 const objectBlob = await getObjectBlob(s3, {
@@ -73,7 +73,7 @@ const objectStream = await getObjectStream(s3, {
 Get metadata about an object without fetching its content.
 
 ```ts
-import { headObject } from '@better-upload/server/helpers';
+import { headObject } from '@ahmedrowaihi/better-upload-server/helpers';
 
 const object = await headObject(s3, {
   bucket: 'my-bucket',
@@ -86,7 +86,7 @@ const object = await headObject(s3, {
 List objects in an S3 bucket, using the [ListObjectsV2 command](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html).
 
 ```ts
-import { listObjectsV2 } from '@better-upload/server/helpers';
+import { listObjectsV2 } from '@ahmedrowaihi/better-upload-server/helpers';
 
 const { contents } = await listObjectsV2(s3, {
   bucket: 'my-bucket',
@@ -98,7 +98,7 @@ const { contents } = await listObjectsV2(s3, {
 Move an object from one key to another, within or between, S3 buckets. Also known as renaming.
 
 ```ts
-import { moveObject } from '@better-upload/server/helpers';
+import { moveObject } from '@ahmedrowaihi/better-upload-server/helpers';
 
 await moveObject(s3, {
   source: {
@@ -122,7 +122,7 @@ await moveObject(s3, {
 Copy an object, within or between, S3 buckets.
 
 ```ts
-import { copyObject } from '@better-upload/server/helpers';
+import { copyObject } from '@ahmedrowaihi/better-upload-server/helpers';
 
 await copyObject(s3, {
   source: {
@@ -141,7 +141,7 @@ await copyObject(s3, {
 Upload an object to an S3 bucket.
 
 ```ts
-import { putObject } from '@better-upload/server/helpers';
+import { putObject } from '@ahmedrowaihi/better-upload-server/helpers';
 
 await putObject(s3, {
   bucket: 'my-bucket',
@@ -161,7 +161,7 @@ await putObject(s3, {
 Delete an object from an S3 bucket.
 
 ```ts
-import { deleteObject } from '@better-upload/server/helpers';
+import { deleteObject } from '@ahmedrowaihi/better-upload-server/helpers';
 
 await deleteObject(s3, {
   bucket: 'my-bucket',
@@ -174,7 +174,7 @@ await deleteObject(s3, {
 Delete multiple objects from an S3 bucket in a single request.
 
 ```ts
-import { deleteObjects } from '@better-upload/server/helpers';
+import { deleteObjects } from '@ahmedrowaihi/better-upload-server/helpers';
 
 const { deleted, errors } = await deleteObjects(s3, {
   bucket: 'my-bucket',
@@ -191,7 +191,7 @@ Helpers for working with multipart uploads in S3-compatible storage services.
 Create a new multipart upload in an S3 bucket.
 
 ```ts
-import { createMultipartUpload } from '@better-upload/server/helpers';
+import { createMultipartUpload } from '@ahmedrowaihi/better-upload-server/helpers';
 
 const { uploadId } = await createMultipartUpload(s3, {
   bucket: 'my-bucket',
@@ -205,7 +205,7 @@ const { uploadId } = await createMultipartUpload(s3, {
 Upload a part of a multipart upload.
 
 ```ts
-import { uploadPart } from '@better-upload/server/helpers';
+import { uploadPart } from '@ahmedrowaihi/better-upload-server/helpers';
 
 const { eTag } = await uploadPart(s3, {
   bucket: 'my-bucket',
@@ -221,7 +221,7 @@ const { eTag } = await uploadPart(s3, {
 Complete a multipart upload in an S3 bucket.
 
 ```ts
-import { completeMultipartUpload } from '@better-upload/server/helpers';
+import { completeMultipartUpload } from '@ahmedrowaihi/better-upload-server/helpers';
 
 await completeMultipartUpload(s3, {
   bucket: 'my-bucket',
@@ -240,7 +240,7 @@ await completeMultipartUpload(s3, {
 Abort a multipart upload in an S3 bucket.
 
 ```ts
-import { abortMultipartUpload } from '@better-upload/server/helpers';
+import { abortMultipartUpload } from '@ahmedrowaihi/better-upload-server/helpers';
 
 await abortMultipartUpload(s3, {
   bucket: 'my-bucket',
@@ -256,7 +256,7 @@ List the parts already uploaded for an in-progress multipart upload. Useful when
 A single call returns up to `maxParts` parts (1000 max, per the S3 API). Paginate by passing `partNumberMarker` from the previous `nextPartNumberMarker` until `isTruncated` is `false`.
 
 ```ts
-import { listParts } from '@better-upload/server/helpers';
+import { listParts } from '@ahmedrowaihi/better-upload-server/helpers';
 
 const { parts, isTruncated, nextPartNumberMarker } = await listParts(s3, {
   bucket: 'my-bucket',
@@ -276,7 +276,7 @@ Helpers for managing object tags in S3-compatible storage services.
 Get the tags of an S3 object.
 
 ```ts
-import { getObjectTagging } from '@better-upload/server/helpers';
+import { getObjectTagging } from '@ahmedrowaihi/better-upload-server/helpers';
 
 const { tags, tagsObject } = await getObjectTagging(s3, {
   bucket: 'my-bucket',
@@ -289,7 +289,7 @@ const { tags, tagsObject } = await getObjectTagging(s3, {
 Set the tags for an S3 object.
 
 ```ts
-import { putObjectTagging } from '@better-upload/server/helpers';
+import { putObjectTagging } from '@ahmedrowaihi/better-upload-server/helpers';
 
 await putObjectTagging(s3, {
   bucket: 'my-bucket',
@@ -306,7 +306,7 @@ await putObjectTagging(s3, {
 Delete all tags from an S3 object.
 
 ```ts
-import { deleteObjectTagging } from '@better-upload/server/helpers';
+import { deleteObjectTagging } from '@ahmedrowaihi/better-upload-server/helpers';
 
 await deleteObjectTagging(s3, {
   bucket: 'my-bucket',

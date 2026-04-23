@@ -117,10 +117,10 @@ importers:
 
   apps/example:
     dependencies:
-      '@better-upload/client':
+      '@ahmedrowaihi/better-upload-client':
         specifier: workspace:*
         version: link:../../packages/client
-      '@better-upload/server':
+      '@ahmedrowaihi/better-upload-server':
         specifier: workspace:*
         version: link:../../packages/server
       '@hookform/resolvers':

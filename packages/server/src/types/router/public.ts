@@ -5,7 +5,7 @@ export type Router = {
   /**
    * The S3 client.
    *
-   * Import a client from `@better-upload/server/clients`.
+   * Import a client from `@ahmedrowaihi/better-upload-server/clients`.
    */
   client: Client;
 

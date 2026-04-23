@@ -1,7 +1,7 @@
 import { Progress } from '@/components/ui/progress';
 import { cn } from '@/lib/utils';
-import type { UploadHookControl } from '@better-upload/client';
-import { formatBytes } from '@better-upload/client/helpers';
+import type { UploadHookControl } from '@ahmedrowaihi/better-upload-client';
+import { formatBytes } from '@ahmedrowaihi/better-upload-client/helpers';
 import { Dot, File } from 'lucide-react';
 
 type UploadProgressProps = {
