@@ -16,23 +16,50 @@ npm i https://pkg.pr.new/@better-upload/server@126
 
 ## Use it
 
+Identify the file with a content-derived fingerprint, not just `name + size` (renames and re-saves collide). A SHA-256 over `[size][first 64KB][last 64KB]` is sub-millisecond even for huge files:
+
+```ts
+const sigCache = new WeakMap<File, Promise<string>>();
+
+export function fileSig(file: File): Promise<string> {
+  let p = sigCache.get(file);
+  if (!p) p = (async () => {
+    const SAMPLE = 64 * 1024;
+    const headEnd = Math.min(SAMPLE, file.size);
+    const tailStart = Math.max(headEnd, file.size - SAMPLE);
+    const head = await file.slice(0, headEnd).arrayBuffer();
+    const tail = tailStart < file.size ? await file.slice(tailStart).arrayBuffer() : new ArrayBuffer(0);
+    const size = new Uint8Array(8);
+    new DataView(size.buffer).setBigUint64(0, BigInt(file.size));
+    const buf = new Uint8Array(8 + head.byteLength + tail.byteLength);
+    buf.set(size, 0); buf.set(new Uint8Array(head), 8); buf.set(new Uint8Array(tail), 8 + head.byteLength);
+    const digest = await crypto.subtle.digest('SHA-256', buf);
+    return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('').slice(0, 32);
+  })();
+  sigCache.set(file, p);
+  return p;
+}
+```
+
+Wire the lifecycle:
+
 ```tsx
 useUploadFile({
   route: 'videos',
-  getResumeState: (file) => {
-    const raw = localStorage.getItem(`upload:${file.name}:${file.size}`);
+  getResumeState: async (file) => {
+    const raw = localStorage.getItem(`upload:${await fileSig(file)}`);
     return raw ? JSON.parse(raw) : undefined;
   },
-  onUploadBegin: ({ file }) => {
+  onUploadBegin: async ({ file }) => {
     if (file.uploadId) {
       localStorage.setItem(
-        `upload:${file.name}:${file.size}`,
+        `upload:${await fileSig(file.raw)}`,
         JSON.stringify({ uploadId: file.uploadId, key: file.objectInfo.key }),
       );
     }
   },
-  onUploadComplete: ({ file }) => {
-    localStorage.removeItem(`upload:${file.name}:${file.size}`);
+  onUploadComplete: async ({ file }) => {
+    localStorage.removeItem(`upload:${await fileSig(file.raw)}`);
   },
 });
 ```
