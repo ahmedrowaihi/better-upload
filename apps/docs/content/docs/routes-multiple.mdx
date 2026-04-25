@@ -269,6 +269,101 @@ route({
 });
 ```
 
+#### Tidying up
+
+Persisted entries pile up if uploads are abandoned. Prune on app boot:
+
+```ts
+const TTL_MS = 24 * 60 * 60 * 1000;
+
+export function pruneStaleResumes() {
+  const now = Date.now();
+  for (let i = localStorage.length - 1; i >= 0; i--) {
+    const k = localStorage.key(i);
+    if (!k?.startsWith('upload:')) continue;
+    try {
+      const { ts } = JSON.parse(localStorage.getItem(k) ?? '{}');
+      if (!ts || now - ts > TTL_MS) localStorage.removeItem(k);
+    } catch {
+      localStorage.removeItem(k);
+    }
+  }
+}
+```
+
+#### Multiple files
+
+`useUploadFiles` callbacks fire with arrays, so iterate them:
+
+```tsx
+useUploadFiles({
+  route: 'videos',
+  getResumeState: (file) => readResume(file),
+  onUploadBegin: ({ files }) => {
+    for (const f of files) if (f.uploadId) saveResume(f);
+  },
+  onUploadComplete: ({ files }) => {
+    for (const f of files) clearResume(f.raw);
+  },
+});
+```
+
+#### Direct utilities
+
+`uploadFile` / `uploadFiles` don't expose `onUploadComplete` — clear from `onFileStateChange` instead:
+
+```ts
+await uploadFile({
+  route: 'videos',
+  file,
+  getResumeState: readResume,
+  onUploadBegin: ({ file }) => {
+    if (file.uploadId) saveResume(file);
+  },
+  onFileStateChange: ({ file }) => {
+    if (file.status === 'complete') clearResume(file.raw);
+  },
+});
+```
+
+#### Wrapping the lifecycle once
+
+The three callbacks always do the same shape of work. A small wrapper collapses them at every call site:
+
+```ts
+function withResumePersistence<T extends Record<string, unknown>>(
+  route: string,
+  props: T,
+): T {
+  const userBegin = props.onUploadBegin as ((d: any) => unknown) | undefined;
+  const userComplete = props.onUploadComplete as ((d: any) => unknown) | undefined;
+  const userStateChange = props.onFileStateChange as ((d: any) => unknown) | undefined;
+
+  return {
+    ...props,
+    getResumeState: (file: File) => readResume(route, file),
+    onUploadBegin: (data: any) => {
+      const list = data.files ?? [data.file];
+      for (const f of list) if (f.uploadId) saveResume(route, f);
+      return userBegin?.(data);
+    },
+    onUploadComplete: (data: any) => {
+      const list = data.files ?? [data.file];
+      for (const f of list) clearResume(route, f.raw);
+      return userComplete?.(data);
+    },
+    onFileStateChange: (data: any) => {
+      if (data.file?.status === 'complete') clearResume(route, data.file.raw);
+      return userStateChange?.(data);
+    },
+  } as T;
+}
+
+useUploadFile(withResumePersistence('videos', { route: 'videos' /* ... */ }));
+```
+
+This works for all four entry points — excess callbacks are ignored where they aren't accepted.
+
 ## Router
 
 The router is where all upload routes are defined. To define a router, create an object with the `Router` type.
